@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dashboard interactivo para evaluaciones de desempeño del personal de Cruz Roja Madrid" />
+  <title>Dashboard Evaluaciones RRHH · Cruz Roja Madrid</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══════════════════════════════════════════════════════════ -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="header-logo" aria-hidden="true">✚</div>
+        <div>
+          <div class="header-title">Dashboard de Evaluaciones RRHH</div>
+          <div class="header-subtitle">Cruz Roja Madrid · Período 2024</div>
+        </div>
+      </div>
+      <div class="header-date" id="header-date" aria-live="polite"></div>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN ══════════════════════════════════════════════════════════════ -->
+  <main class="main" role="main">
+
+    <!-- KPI Cards -->
+    <p class="section-title" aria-label="Indicadores clave">Indicadores Clave</p>
+    <div class="kpi-grid" role="list">
+      <div class="kpi-card" role="listitem">
+        <span class="kpi-label">Total evaluados</span>
+        <div class="kpi-value" id="kpi-total">—</div>
+        <span class="kpi-icon" aria-hidden="true">👥</span>
+      </div>
+      <div class="kpi-card" role="listitem">
+        <span class="kpi-label">Puntuación media</span>
+        <div class="kpi-value" id="kpi-avg">—<span> / 100</span></div>
+        <span class="kpi-icon" aria-hidden="true">📊</span>
+      </div>
+      <div class="kpi-card excelente" role="listitem">
+        <span class="kpi-label">Excelente</span>
+        <div class="kpi-value" id="kpi-excelente">—</div>
+        <span class="kpi-icon" aria-hidden="true">⭐</span>
+      </div>
+      <div class="kpi-card bueno" role="listitem">
+        <span class="kpi-label">Bueno</span>
+        <div class="kpi-value" id="kpi-bueno">—</div>
+        <span class="kpi-icon" aria-hidden="true">✅</span>
+      </div>
+      <div class="kpi-card mejorable" role="listitem">
+        <span class="kpi-label">Mejorable</span>
+        <div class="kpi-value" id="kpi-mejorable">—</div>
+        <span class="kpi-icon" aria-hidden="true">⚠️</span>
+      </div>
+      <div class="kpi-card insuficiente" role="listitem">
+        <span class="kpi-label">Insuficiente</span>
+        <div class="kpi-value" id="kpi-insuficiente">—</div>
+        <span class="kpi-icon" aria-hidden="true">❌</span>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <p class="section-title" aria-label="Gráficos de análisis">Análisis por Departamento y Distribución</p>
+    <div class="charts-grid">
+
+      <div class="chart-card">
+        <div class="chart-card-title">📊 Puntuación Media por Departamento</div>
+        <div class="bar-chart" id="dept-chart" role="img" aria-label="Gráfico de barras: puntuación media por departamento">
+          <p class="no-results">Cargando...</p>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-title">🍩 Distribución por Estado</div>
+        <div class="donut-wrapper">
+          <div class="donut-chart" role="img" aria-label="Gráfico circular: distribución por estado">
+            <svg id="donut-svg" viewBox="0 0 140 140" width="140" height="140"></svg>
+            <div class="donut-center">
+              <div class="donut-center-value" id="donut-avg">—</div>
+              <div class="donut-center-label">Media</div>
+            </div>
+          </div>
+          <div class="donut-legend" id="donut-legend"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Filters -->
+    <p class="section-title" aria-label="Filtros de búsqueda">Filtros</p>
+    <div class="filters-bar" role="search">
+      <div class="filter-group">
+        <label class="filter-label" for="filter-dept">Departamento</label>
+        <select id="filter-dept" class="filter-control" aria-label="Filtrar por departamento">
+          <option value="">Todos los departamentos</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="filter-estado">Estado</label>
+        <select id="filter-estado" class="filter-control" aria-label="Filtrar por estado">
+          <option value="">Todos los estados</option>
+          <option value="excelente">⭐ Excelente</option>
+          <option value="bueno">✅ Bueno</option>
+          <option value="mejorable">⚠️ Mejorable</option>
+          <option value="insuficiente">❌ Insuficiente</option>
+        </select>
+      </div>
+      <div class="filter-group filter-search">
+        <label class="filter-label" for="filter-search">Buscar</label>
+        <input
+          type="search"
+          id="filter-search"
+          placeholder="Nombre, cargo o departamento..."
+          class="filter-control"
+          aria-label="Buscar empleado"
+          autocomplete="off"
+        />
+      </div>
+      <button id="btn-reset" class="btn-reset" type="button" aria-label="Restablecer filtros">
+        Restablecer
+      </button>
+    </div>
+
+    <!-- Employee Table -->
+    <p class="section-title" aria-label="Tabla de evaluaciones">Evaluaciones del Personal</p>
+    <div class="table-wrapper">
+      <div class="table-header-row">
+        <span class="table-count" id="table-count" aria-live="polite" aria-atomic="true"></span>
+      </div>
+      <div class="table-responsive">
+        <table aria-label="Tabla de evaluaciones de empleados">
+          <thead>
+            <tr>
+              <th data-sort="nombre" scope="col" tabindex="0" role="columnheader" aria-sort="ascending">
+                Empleado <span class="sort-icon" aria-hidden="true">⇅</span>
+              </th>
+              <th data-sort="departamento" scope="col" tabindex="0" role="columnheader" aria-sort="none">
+                Departamento <span class="sort-icon" aria-hidden="true">⇅</span>
+              </th>
+              <th data-sort="puntuacion" scope="col" tabindex="0" role="columnheader" aria-sort="none">
+                Puntuación <span class="sort-icon" aria-hidden="true">⇅</span>
+              </th>
+              <th data-sort="estado" scope="col" tabindex="0" role="columnheader" aria-sort="none">
+                Estado <span class="sort-icon" aria-hidden="true">⇅</span>
+              </th>
+              <th data-sort="fechaEvaluacion" scope="col" tabindex="0" role="columnheader" aria-sort="none">
+                Fecha Evaluación <span class="sort-icon" aria-hidden="true">⇅</span>
+              </th>
+              <th scope="col">Detalle</th>
+            </tr>
+          </thead>
+          <tbody id="employee-tbody">
+            <tr>
+              <td colspan="6">
+                <div class="no-results">
+                  <span class="no-results-icon" aria-hidden="true">⏳</span>
+                  Cargando datos...
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══ MODAL ════════════════════════════════════════════════════════════ -->
+  <div
+    id="modal-overlay"
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-name"
+    aria-hidden="true"
+  >
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-header-name" id="modal-name"></div>
+          <div class="modal-header-meta" id="modal-meta"></div>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="Cerrar detalle">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-score-row">
+          <div>
+            <div class="modal-score-big" id="modal-score"></div>
+            <div id="modal-badge" style="margin-top:8px"></div>
+          </div>
+          <div style="text-align:right;color:var(--color-text-muted);font-size:.82rem" id="modal-fecha"></div>
+        </div>
+        <div class="competencias-title">Competencias evaluadas</div>
+        <div id="modal-competencias"></div>
+        <div class="modal-comentarios">
+          <div class="modal-comentarios-label">Comentarios del evaluador</div>
+          <span id="modal-comentarios"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <p>Dashboard de Evaluaciones RRHH · Cruz Roja Madrid · 2024</p>
+    <p style="margin-top:4px">Datos de carácter interno. Uso exclusivo del departamento de Recursos Humanos.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

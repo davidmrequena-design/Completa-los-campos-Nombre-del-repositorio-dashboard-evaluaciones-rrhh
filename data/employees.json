@@ -1,0 +1,172 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ana García López",
+    "departamento": "Voluntariado",
+    "cargo": "Coordinadora de Voluntarios",
+    "fechaEvaluacion": "2024-03-15",
+    "puntuacion": 92,
+    "competencias": {
+      "liderazgo": 95,
+      "comunicacion": 90,
+      "trabajoEquipo": 88,
+      "iniciativa": 94,
+      "cumplimientoObjetivos": 93
+    },
+    "estado": "excelente",
+    "comentarios": "Excelente desempeño en la coordinación de equipos de voluntarios."
+  },
+  {
+    "id": 2,
+    "nombre": "Carlos Martínez Ruiz",
+    "departamento": "Socorros",
+    "cargo": "Técnico de Emergencias",
+    "fechaEvaluacion": "2024-03-18",
+    "puntuacion": 85,
+    "competencias": {
+      "liderazgo": 80,
+      "comunicacion": 88,
+      "trabajoEquipo": 92,
+      "iniciativa": 82,
+      "cumplimientoObjetivos": 83
+    },
+    "estado": "bueno",
+    "comentarios": "Buen rendimiento en situaciones de emergencia y trabajo en equipo."
+  },
+  {
+    "id": 3,
+    "nombre": "María Sánchez Torres",
+    "departamento": "Salud",
+    "cargo": "Enfermera Comunitaria",
+    "fechaEvaluacion": "2024-03-20",
+    "puntuacion": 78,
+    "competencias": {
+      "liderazgo": 72,
+      "comunicacion": 85,
+      "trabajoEquipo": 80,
+      "iniciativa": 75,
+      "cumplimientoObjetivos": 78
+    },
+    "estado": "bueno",
+    "comentarios": "Cumple con los objetivos establecidos y muestra compromiso con la comunidad."
+  },
+  {
+    "id": 4,
+    "nombre": "Juan López Fernández",
+    "departamento": "Intervención Social",
+    "cargo": "Trabajador Social",
+    "fechaEvaluacion": "2024-03-22",
+    "puntuacion": 65,
+    "competencias": {
+      "liderazgo": 60,
+      "comunicacion": 70,
+      "trabajoEquipo": 68,
+      "iniciativa": 62,
+      "cumplimientoObjetivos": 65
+    },
+    "estado": "mejorable",
+    "comentarios": "Necesita mejorar en proactividad y gestión del tiempo."
+  },
+  {
+    "id": 5,
+    "nombre": "Laura Rodríguez Pérez",
+    "departamento": "Formación",
+    "cargo": "Técnica de Formación",
+    "fechaEvaluacion": "2024-03-25",
+    "puntuacion": 88,
+    "competencias": {
+      "liderazgo": 85,
+      "comunicacion": 92,
+      "trabajoEquipo": 87,
+      "iniciativa": 90,
+      "cumplimientoObjetivos": 86
+    },
+    "estado": "bueno",
+    "comentarios": "Destaca especialmente en la comunicación y diseño de programas formativos."
+  },
+  {
+    "id": 6,
+    "nombre": "Pedro Jiménez Castro",
+    "departamento": "Voluntariado",
+    "cargo": "Gestor de Proyectos",
+    "fechaEvaluacion": "2024-03-28",
+    "puntuacion": 55,
+    "competencias": {
+      "liderazgo": 50,
+      "comunicacion": 58,
+      "trabajoEquipo": 60,
+      "iniciativa": 52,
+      "cumplimientoObjetivos": 55
+    },
+    "estado": "insuficiente",
+    "comentarios": "Requiere plan de mejora urgente. Se ha iniciado acompañamiento personalizado."
+  },
+  {
+    "id": 7,
+    "nombre": "Elena Moreno Díaz",
+    "departamento": "Salud",
+    "cargo": "Psicóloga",
+    "fechaEvaluacion": "2024-04-02",
+    "puntuacion": 96,
+    "competencias": {
+      "liderazgo": 94,
+      "comunicacion": 98,
+      "trabajoEquipo": 95,
+      "iniciativa": 97,
+      "cumplimientoObjetivos": 96
+    },
+    "estado": "excelente",
+    "comentarios": "Rendimiento excepcional. Referente en el departamento."
+  },
+  {
+    "id": 8,
+    "nombre": "Roberto Álvarez Gil",
+    "departamento": "Socorros",
+    "cargo": "Jefe de Equipo",
+    "fechaEvaluacion": "2024-04-05",
+    "puntuacion": 82,
+    "competencias": {
+      "liderazgo": 90,
+      "comunicacion": 78,
+      "trabajoEquipo": 85,
+      "iniciativa": 80,
+      "cumplimientoObjetivos": 77
+    },
+    "estado": "bueno",
+    "comentarios": "Gran capacidad de liderazgo. Puede mejorar en comunicación escrita."
+  },
+  {
+    "id": 9,
+    "nombre": "Sofía Vega Núñez",
+    "departamento": "Intervención Social",
+    "cargo": "Educadora Social",
+    "fechaEvaluacion": "2024-04-08",
+    "puntuacion": 90,
+    "competencias": {
+      "liderazgo": 88,
+      "comunicacion": 93,
+      "trabajoEquipo": 91,
+      "iniciativa": 89,
+      "cumplimientoObjetivos": 89
+    },
+    "estado": "excelente",
+    "comentarios": "Excelente desempeño en atención a colectivos vulnerables."
+  },
+  {
+    "id": 10,
+    "nombre": "Miguel Herrera Santos",
+    "departamento": "Formación",
+    "cargo": "Coordinador Académico",
+    "fechaEvaluacion": "2024-04-10",
+    "puntuacion": 73,
+    "competencias": {
+      "liderazgo": 75,
+      "comunicacion": 70,
+      "trabajoEquipo": 78,
+      "iniciativa": 72,
+      "cumplimientoObjetivos": 70
+    },
+    "estado": "bueno",
+    "comentarios": "Cumple los objetivos. Potencial de crecimiento notable."
+  }
+]
