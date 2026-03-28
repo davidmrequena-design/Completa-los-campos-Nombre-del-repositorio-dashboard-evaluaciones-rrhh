@@ -232,12 +232,12 @@ footer{background:var(--navy);border-top:2px solid var(--cr);padding:12px 28px;t
 
     <div class="ins-block">
       <div class="ins-t">&#127942; Top 5 supervisores más activos</div>
-      <div class="ins-b">
+      <div class="ins-b" id="top5SupHtml">
         <b>1. Francisco Rico Miranda</b> — 47 evaluaciones<br>
-        <b>2. Maria Dolores Veguillas Arias</b> — 43 evaluaciones<br>
-        <b>3. Ana Belen Carrillo Martinez</b> — 39 evaluaciones<br>
-        <b>4. Laura Ines Cosculluela Bernues</b> — 36 evaluaciones<br>
-        <b>5. Noelia Benavent Estal</b> — 35 evaluaciones
+        <b>2. Laura Serrano Mena</b> — 36 evaluaciones<br>
+        <b>3. David Martin Requena</b> — 34 evaluaciones<br>
+        <b>4. Marta Romero Hernandez</b> — 34 evaluaciones<br>
+        <b>5. Sara Cepeda Vegas</b> — 30 evaluaciones
       </div>
     </div>
 
@@ -296,7 +296,7 @@ footer{background:var(--navy);border-top:2px solid var(--cr);padding:12px 28px;t
 <footer><div class="footer-txt"><strong>Cruz Roja Madrid</strong> &middot; RRHH &middot; Encuestas Desempe&ntilde;o &middot; Datos actualizados a <strong>marzo 2026</strong></div></footer>
 
 <script>
-Chart.defaults.font.family="Montserrat";Chart.defaults.font.size=11;
+try{Chart.defaults.font.family="Montserrat";Chart.defaults.font.size=11;}catch(e){console.warn('Chart.js not loaded:',e);}
 
 // Tab switching
 function sT(i,b){document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("on")});b.classList.add("on");document.querySelectorAll(".panel").forEach(function(p,j){if(j===i){p.classList.add("on")}else{p.classList.remove("on")}}); if(i===1)renderSupTable(); if(i===4){buildExecSummaryRRHH();renderSupInsightsTable();}}
@@ -533,7 +533,7 @@ function renderDeptsTable() {
 var CR_COLORS = ['#00205B','#EF3340','#1A5FA8','#1A7A42','#C47A00','#58595B','#0A326E','#C0001D','#3B82F6','#10B981','#F59E0B','#6B7280'];
 
 // Jobs doughnut (panel 0)
-new Chart(document.getElementById('chartJobs'),{
+try{new Chart(document.getElementById('chartJobs'),{
   type:'bar',
   data:{
     labels:["MEDIADOR/A", "TRABAJADOR/A SOCIAL", "MONITOR/A", "TÉCNICO/A EMPLEO", "ADMINISTRATIVO/A", "INTEGRADOR/A SOCIAL", "RESPONSABLE PROYECTO", "TÉCNICO/A MAYORES", "PSICÓLOGO/A", "REF. INFANCIA", "TÉCNICO/A GESTIÓN", "RESPONSABLE PROGRAMA"],
@@ -544,10 +544,10 @@ new Chart(document.getElementById('chartJobs'),{
     }]
   },
   options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{maxRotation:35,font:{size:9}}},y:{beginAtZero:true}}}
-});
+});}catch(e){console.warn('Chart render failed:',e);}
 
 // Depts bar (panel 0)
-new Chart(document.getElementById('chartDepts'),{
+try{new Chart(document.getElementById('chartDepts'),{
   type:'bar',
   data:{
     labels:["IS-AH DISP. EMERGENCIA ARTEAGA", "AL. MADRID - INFANCIA", "IS-AH URS", "CV-DISP. BECERRIL - REFUGIADOS", "DPTO. ECONÓMICO-FINANCIERO", "AL. MAD-CENTRO", "IS-REF DISP. WELCOME", "AC. PARLA - DISP. REFUGIADOS"],
@@ -563,20 +563,20 @@ new Chart(document.getElementById('chartDepts'),{
     plugins:{legend:{display:false}},
     scales:{x:{beginAtZero:true},y:{ticks:{font:{size:9}}}}
   }
-});
+});}catch(e){console.warn('Chart render failed:',e);}
 
 // Pie chart (panel 0)
-new Chart(document.getElementById('chartPie'),{
+try{new Chart(document.getElementById('chartPie'),{
   type:'doughnut',
   data:{
     labels:['Supervisor','Cliente'],
     datasets:[{data:[1111,278],backgroundColor:['#00205B','#EF3340'],borderWidth:2}]
   },
   options:{responsive:true,plugins:{legend:{display:false}}}
-});
+});}catch(e){console.warn('Chart render failed:',e);}
 
 // Jobs bar (panel 2)
-new Chart(document.getElementById('chartJobsBar'),{
+try{new Chart(document.getElementById('chartJobsBar'),{
   type:'bar',
   data:{
     labels:["MEDIADOR/A", "TRABAJADOR/A SOCIAL", "MONITOR/A", "TÉCNICO/A EMPLEO", "ADMINISTRATIVO/A", "INTEGRADOR/A SOCIAL", "RESPONSABLE PROYECTO", "TÉCNICO/A MAYORES", "PSICÓLOGO/A", "REF. INFANCIA", "TÉCNICO/A GESTIÓN", "RESPONSABLE PROGRAMA"],
@@ -588,10 +588,10 @@ new Chart(document.getElementById('chartJobsBar'),{
     }]
   },
   options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{maxRotation:35,font:{size:9}}},y:{beginAtZero:true}}}
-});
+});}catch(e){console.warn('Chart render failed:',e);}
 
 // Depts bar (panel 3)
-new Chart(document.getElementById('chartDeptsBar'),{
+try{new Chart(document.getElementById('chartDeptsBar'),{
   type:'bar',
   data:{
     labels:["IS-AH DISP. EMERGENCIA ARTEAGA", "AL. MADRID - INFANCIA", "IS-AH URS", "CV-DISP. BECERRIL - REFUGIADOS", "DPTO. ECONÓMICO-FINANCIERO", "AL. MAD-CENTRO", "IS-REF DISP. WELCOME", "AC. PARLA - DISP. REFUGIADOS"],
@@ -608,7 +608,7 @@ new Chart(document.getElementById('chartDeptsBar'),{
     plugins:{legend:{display:false}},
     scales:{x:{beginAtZero:true},y:{ticks:{font:{size:9}}}}
   }
-});
+});}catch(e){console.warn('Chart render failed:',e);}
 
 // Init tables
 renderJobsTable();
@@ -656,16 +656,17 @@ function buildExecSummaryRRHH() {
 function renderSupInsightsTable() {
   var tbody = document.getElementById('supInsightsTbody');
   if (!tbody) return;
-  var total = SUP_DATA.reduce(function(s,r){return s+r[1]},0);
-  var sorted = SUP_DATA.slice().sort(function(a,b){return b[1]-a[1]});
+  // SUP_DATA: [rank, name, count, deptCount, mainDept]
+  var total = SUP_DATA.reduce(function(s,r){return s+r[2]},0);
+  var sorted = SUP_DATA.slice().sort(function(a,b){return b[2]-a[2]});
   var html = '';
   sorted.forEach(function(r,i){
-    var pct = (r[1]/total*100).toFixed(1);
-    var badge = r[1]===1 ? ' <span style="background:var(--amber,#C47A00);color:#fff;font-size:9px;padding:1px 5px;border-radius:9px;font-weight:700">&#9888; 1 eval.</span>' : '';
+    var pct = (r[2]/total*100).toFixed(1);
+    var badge = r[2]===1 ? ' <span style="background:var(--amber);color:#fff;font-size:9px;padding:1px 5px;border-radius:9px;font-weight:700">&#9888; 1 eval.</span>' : '';
     html += '<tr><td>'+(i+1)+'</td>' +
-      '<td style="font-size:10px">' + (r[3]||'—') + badge + '</td>' +
-      '<td style="font-size:10px">' + (r[2]||'—') + '</td>' +
-      '<td class="n"><b>'+r[1]+'</b></td>' +
+      '<td style="font-size:10px">' + r[1] + badge + '</td>' +
+      '<td style="font-size:10px;color:var(--gris)">' + r[4] + '</td>' +
+      '<td class="n"><b>'+r[2]+'</b></td>' +
       '<td class="n">'+pct+'%</td></tr>';
   });
   tbody.innerHTML = html;
