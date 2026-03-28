@@ -5,63 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Dashboard Evaluaciones RRHH · Cruz Roja Madrid — Completo</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js">
-// ── EXECUTIVE SUMMARY RRHH ──
-function buildExecSummaryRRHH() {
-  var el = document.getElementById('execSummaryRRHH');
-  if (!el) return;
-  var trends = [
-    '<div class="exec-item"><span class="trend-flat">&#8594;</span> Total evaluaciones: <b>1.389</b> (marzo 2026)</div>',
-    '<div class="exec-item"><span class="trend-up">&#8593;</span> Evaluaciones de supervisor: <b>1.111 (80%)</b></div>',
-    '<div class="exec-item"><span class="trend-flat">&#8594;</span> Evaluaciones de cliente: <b>278 (20%)</b></div>',
-    '<div class="exec-item"><span class="trend-up">&#8593;</span> Supervisores activos: <b>93</b> evaluadores</div>',
-    '<div class="exec-item"><span class="trend-flat">&#8594;</span> Departamentos participantes: <b>106</b></div>',
-    '<div class="exec-item"><span class="trend-up">&#8593;</span> Puestos evaluados: <b>78</b> tipologías</div>'
-  ].join('');
-  var highlights = [
-    '<div class="exec-item">&#127942; <b>Top supervisor:</b> Francisco Rico Miranda — 47 eval.</div>',
-    '<div class="exec-item">&#127970; <b>Área más evaluada:</b> DISP. EMERGENCIA ARTEAGA — 141 eval.</div>',
-    '<div class="exec-item">&#128188; <b>Puesto más evaluado:</b> MEDIADOR/A — 237 eval.</div>',
-    '<div class="exec-item">&#128274; <b>Alerta:</b> DAVID MARTIN REQUENA evaluó a 34 personas</div>'
-  ].join('');
-  var risks = [
-    {n:14, txt:'Supervisores con solo 1 evaluación realizada — proceso posiblemente incompleto'},
-    {n:1111, txt:'Evaluaciones de supervisor vs 278 de cliente — ratio 80/20'},
-    {n:47, txt:'Máxima carga individual: Francisco Rico Miranda (47 evaluaciones)'},
-    {n:141, txt:'Área DISP. EMERGENCIA ARTEAGA concentra 10,2% del total de evaluaciones'}
-  ];
-  var risksHtml = risks.map(function(r,i){
-    return '<div class="risk-item"><span class="risk-num">'+(i+1)+'</span><span class="risk-txt">'+r.txt+'</span></div>';
-  }).join('');
-  el.innerHTML = '<h2>Resumen Ejecutivo — Insights RRHH Marzo 2026</h2>' +
-    '<div class="exec-grid">' +
-      '<div class="exec-col"><h3>Tendencias y Volumen</h3>' + trends + '</div>' +
-      '<div class="exec-col"><h3>Indicadores Clave</h3>' + highlights +
-        '<h3 style="margin-top:12px">Puntos de Atención</h3>' + risksHtml + '</div>' +
-    '</div>';
-}
-
-// ── SUPERVISOR INSIGHTS TABLE ──
-function renderSupInsightsTable() {
-  var tbody = document.getElementById('supInsightsTbody');
-  if (!tbody) return;
-  var total = SUP_DATA_FULL.reduce(function(s,r){return s+r[1]},0);
-  var sorted = SUP_DATA_FULL.slice().sort(function(a,b){return b[1]-a[1]});
-  var html = '';
-  sorted.forEach(function(r,i){
-    var pct = (r[1]/total*100).toFixed(1);
-    var badge = r[1]===1 ? ' <span style="background:var(--amber,#C47A00);color:#fff;font-size:9px;padding:1px 5px;border-radius:9px;font-weight:700">&#9888; 1 eval.</span>' : '';
-    html += '<tr><td>'+(i+1)+'</td>' +
-      '<td style="font-size:10px">' + (r[3]||'—') + badge + '</td>' +
-      '<td style="font-size:10px">' + (r[2]||'—') + '</td>' +
-      '<td class="n"><b>'+r[1]+'</b></td>' +
-      '<td class="n">'+pct+'%</td></tr>';
-  });
-  tbody.innerHTML = html;
-}
-
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 <style>
 :root{--cr:#EF3340;--cr-d:#C0001D;--cr-l:#FEF0F1;--navy:#00205B;--navy-m:#0A326E;--gris:#58595B;--gris-l:#9CA3AF;--fondo:#F0F2F5;--borde:#DDE1E9;--verde:#1A7A42;--verde-l:#E6F4ED;--amber:#C47A00;--amber-l:#FEF5E0;--azul:#1A5FA8;--azul-l:#E8F0FA;--rojo-l:#FDECEA;--shadow:0 1px 3px rgba(0,0,0,.07),0 3px 10px rgba(0,0,0,.05);--r:9px;--font:'Montserrat',sans-serif}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -672,6 +616,63 @@ renderDeptsTable();
 
 // Init sup table (will show when tab clicked)
 renderSupTable();
+
+// ── EXECUTIVE SUMMARY RRHH ──
+function buildExecSummaryRRHH() {
+  var el = document.getElementById('execSummaryRRHH');
+  if (!el) return;
+  var trends = [
+    '<div class="exec-item"><span class="trend-flat">&#8594;</span> Total evaluaciones: <b>1.389</b> (marzo 2026)</div>',
+    '<div class="exec-item"><span class="trend-up">&#8593;</span> Evaluaciones de supervisor: <b>1.111 (80%)</b></div>',
+    '<div class="exec-item"><span class="trend-flat">&#8594;</span> Evaluaciones de cliente: <b>278 (20%)</b></div>',
+    '<div class="exec-item"><span class="trend-up">&#8593;</span> Supervisores activos: <b>93</b> evaluadores</div>',
+    '<div class="exec-item"><span class="trend-flat">&#8594;</span> Departamentos participantes: <b>106</b></div>',
+    '<div class="exec-item"><span class="trend-up">&#8593;</span> Puestos evaluados: <b>78</b> tipologías</div>'
+  ].join('');
+  var highlights = [
+    '<div class="exec-item">&#127942; <b>Top supervisor:</b> Francisco Rico Miranda — 47 eval.</div>',
+    '<div class="exec-item">&#127970; <b>Área más evaluada:</b> DISP. EMERGENCIA ARTEAGA — 141 eval.</div>',
+    '<div class="exec-item">&#128188; <b>Puesto más evaluado:</b> MEDIADOR/A — 237 eval.</div>',
+    '<div class="exec-item">&#128274; <b>Alerta:</b> DAVID MARTIN REQUENA evaluó a 34 personas</div>'
+  ].join('');
+  var risks = [
+    {n:14, txt:'Supervisores con solo 1 evaluación realizada — proceso posiblemente incompleto'},
+    {n:1111, txt:'Evaluaciones de supervisor vs 278 de cliente — ratio 80/20'},
+    {n:47, txt:'Máxima carga individual: Francisco Rico Miranda (47 evaluaciones)'},
+    {n:141, txt:'Área DISP. EMERGENCIA ARTEAGA concentra 10,2% del total de evaluaciones'}
+  ];
+  var risksHtml = risks.map(function(r,i){
+    return '<div class="risk-item"><span class="risk-num">'+(i+1)+'</span><span class="risk-txt">'+r.txt+'</span></div>';
+  }).join('');
+  el.innerHTML = '<h2>Resumen Ejecutivo — Insights RRHH Marzo 2026</h2>' +
+    '<div class="exec-grid">' +
+      '<div class="exec-col"><h3>Tendencias y Volumen</h3>' + trends + '</div>' +
+      '<div class="exec-col"><h3>Indicadores Clave</h3>' + highlights +
+        '<h3 style="margin-top:12px">Puntos de Atención</h3>' + risksHtml + '</div>' +
+    '</div>';
+}
+
+// ── SUPERVISOR INSIGHTS TABLE ──
+function renderSupInsightsTable() {
+  var tbody = document.getElementById('supInsightsTbody');
+  if (!tbody) return;
+  var total = SUP_DATA.reduce(function(s,r){return s+r[1]},0);
+  var sorted = SUP_DATA.slice().sort(function(a,b){return b[1]-a[1]});
+  var html = '';
+  sorted.forEach(function(r,i){
+    var pct = (r[1]/total*100).toFixed(1);
+    var badge = r[1]===1 ? ' <span style="background:var(--amber,#C47A00);color:#fff;font-size:9px;padding:1px 5px;border-radius:9px;font-weight:700">&#9888; 1 eval.</span>' : '';
+    html += '<tr><td>'+(i+1)+'</td>' +
+      '<td style="font-size:10px">' + (r[3]||'—') + badge + '</td>' +
+      '<td style="font-size:10px">' + (r[2]||'—') + '</td>' +
+      '<td class="n"><b>'+r[1]+'</b></td>' +
+      '<td class="n">'+pct+'%</td></tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+
+
 </script>
 </body>
 </html>
